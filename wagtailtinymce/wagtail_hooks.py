@@ -35,6 +35,8 @@ from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
 
 from wagtail import __version__ as WAGTAIL_VERSION
+from wagtail.admin.rich_text.converters.editor_html import WhitelistRule
+from wagtail.core.whitelist import attribute_rule, allow_without_attributes
 
 if DJANGO_VERSION >= '2.0':
     from django.urls import reverse
@@ -165,3 +167,20 @@ def docs_richtexteditor_js():
         'wagtaildocs/js/document-chooser-modal.js',
     ])
     return preload + js_includes
+
+
+@hooks.register('register_rich_text_features')
+def whitelist_table(features):
+    cell_attributes = attribute_rule({'rowspan': True, 'colspan': True, 'width': True, 'height': True, 'style': True})
+
+    features.register_converter_rule('editorhtml', 'table', [
+        WhitelistRule('table', attribute_rule({'style': True, 'border': True})),
+        WhitelistRule('thead', allow_without_attributes),
+        WhitelistRule('tbody', allow_without_attributes),
+        WhitelistRule('tfoot', allow_without_attributes),
+        WhitelistRule('tr', allow_without_attributes),
+        WhitelistRule('th', cell_attributes),
+        WhitelistRule('td', cell_attributes),
+    ])
+
+    features.default_features.append('table')
