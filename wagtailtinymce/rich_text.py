@@ -61,13 +61,9 @@ class TinyMCERichTextArea(WidgetWithScript, widgets.Textarea):
                 ]
             ],
             'menus': False,
-            'options': {
-                'browser_spellcheck': True,
-                'noneditable_leave_contenteditable': True,
-                'language': translation.to_locale(
-                    translation.get_language() or settings.LANGUAGE_CODE),
-                'language_load': True,
-            },
+            'browser_spellcheck': True,
+            'language': translation.to_locale(
+                translation.get_language() or settings.LANGUAGE_CODE),
         }
 
     def __init__(self, attrs=None, **kwargs):
@@ -98,9 +94,7 @@ class TinyMCERichTextArea(WidgetWithScript, widgets.Textarea):
         return super(TinyMCERichTextArea, self).render(name, translated_value, attrs, renderer)
 
     def render_js_init(self, id_, name, value):
-        kwargs = {
-            'options': self.kwargs.get('options', {}),
-        }
+        kwargs = self.kwargs.copy()
 
         if 'buttons' in self.kwargs:
             if self.kwargs['buttons'] is False:
