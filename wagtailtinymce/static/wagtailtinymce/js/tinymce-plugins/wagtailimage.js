@@ -33,9 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
             /* stop editing and resizing of embedded image content */
             function fixContent() {
-                $(editor.getBody()).find('[data-embedtype=image]').each(function () {
-                    $(this).attr('contenteditable', false).attr('data-mce-contenteditable', 'false').find('div,table,img').attr('data-mce-resize', 'false');
-                });
+                $(editor.getBody()).find('[data-embedtype=image]').attr('data-mce-resize', 'false');
             }
 
             function showDialog() {
