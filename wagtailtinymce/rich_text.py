@@ -52,12 +52,11 @@ class TinyMCERichTextArea(WidgetWithScript, widgets.Textarea):
             'buttons': [
                 [
                     ['undo', 'redo'],
-                    ['styleselect'],
                     ['bold', 'italic'],
-                    ['bullist', 'numlist', 'outdent', 'indent'],
+                    ['bullist', 'numlist'],
                     ['table'],
                     ['link', 'unlink'],
-                    ['wagtaildoclink', 'wagtailimage', 'wagtailembed'],
+                    ['wagtailimage', 'wagtaildoclink', 'wagtailembed'],
                     ['pastetext', 'fullscreen'],
                 ]
             ],
