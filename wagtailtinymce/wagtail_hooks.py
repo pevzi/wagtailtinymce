@@ -87,7 +87,7 @@ def insert_editor_js():
         '    window.tinymce.suffix = "";'
         '}}());'
         '</script>',
-        to_js_primitive(static('wagtailtinymce/js/vendor/tinymce')),
+        to_js_primitive(static('wagtailtinymce/js/vendor/tinymce/tinymce.min.js').rsplit('/', 1)[0]),
     )
     js_includes = _format_js_includes([
         'wagtailtinymce/js/vendor/tinymce/jquery.tinymce.min.js',
